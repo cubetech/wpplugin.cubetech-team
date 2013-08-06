@@ -29,6 +29,12 @@ $cubetech_team_meta_fields = array(
 		'type'	=> 'text'
 	),
 	array(
+		'label'=> 'Telefonnummer',
+		'desc'	=> 'Telefonnummer des Mitglieds (Format: +xx xx xxx xx xx)',
+		'id'	=> $prefix.'phone',
+		'type'	=> 'text'
+	),
+	array(
 		'label'=> 'Facebook Profil',
 		'desc'	=> 'Facebook Benutzer-ID des Mitglieds',
 		'id'	=> $prefix.'facebook',

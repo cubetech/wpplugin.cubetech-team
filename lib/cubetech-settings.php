@@ -19,6 +19,8 @@ function register_cubetech_team_settings() {
 	register_setting( 'cubetech-team-settings-group', 'cubetech_team_show_image' );
 	register_setting( 'cubetech-team-settings-group', 'cubetech_team_show_mail' );
 	register_setting( 'cubetech-team-settings-group', 'cubetech_team_show_phone' );
+	register_setting( 'cubetech-team-settings-group', 'cubetech_team_show_hr' );
+	register_setting( 'cubetech-team-settings-group', 'cubetech_team_show_groups' );
 }
 
 function cubetech_team_settings_page() {
@@ -45,6 +47,16 @@ function cubetech_team_settings_page() {
         </td>
         </tr>
         
+        <tr valign="top">
+        <th scope="row">Gruppentitel anzeigen</th>
+        <td><input type="checkbox" name="cubetech_team_show_groups" value="checked" <?php echo get_option('cubetech_team_show_groups'); ?> /></td>
+        </tr>
+         
+        <tr valign="top">
+        <th scope="row">Horizontale Trennlinie anzeigen</th>
+        <td><input type="checkbox" name="cubetech_team_show_hr" value="checked" <?php echo get_option('cubetech_team_show_hr'); ?> /></td>
+        </tr>
+         
     </table>
     
     <?php submit_button(); ?>

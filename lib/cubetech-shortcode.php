@@ -46,7 +46,8 @@ function cubetech_team_shortcode($atts)
 		    )
 		);
 		
-		$return .= '<h2>' . $tax->name . '</h2>';
+		if ( get_option('cubetech_team_show_groups') != false )
+			$return .= '<h2>' . $tax->name . '</h2>';
 		
 		$args = array(
 			'posts_per_page'  	=> 999,
@@ -64,7 +65,12 @@ function cubetech_team_shortcode($atts)
 		
 		$return .= cubetech_team_content($posts);
 		
-		$return .= '<div class="cubetech-team-clear"><hr /></div></div>';
+		$return .= '<div class="cubetech-team-clear">';
+		
+		if ( get_option('cubetech_team_show_hr') != false )
+			$return .= '<hr />';
+		
+		$return .= '<hr /></div></div>';
 		
 	}
 		

@@ -8,12 +8,14 @@
  * Author URI: http://www.cubetech.ch
  */
 
+include_once('lib/cubetech-install.php');
 include_once('lib/cubetech-post-type.php');
 include_once('lib/cubetech-shortcode.php');
 include_once('lib/cubetech-group.php');
 include_once('lib/cubetech-metabox.php');
+include_once('lib/cubetech-settings.php');
 
-add_image_size( 'cubetech-team-thumb', 423, 217, true );
+add_image_size( 'cubetech-team-thumb', 231, 124, true );
 
 wp_enqueue_script('jquery');
 wp_register_script('cubetech_team_js', plugins_url('assets/js/cubetech-team.js', __FILE__), 'jquery');

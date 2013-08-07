@@ -13,64 +13,117 @@ function cubetech_team_shortcode($atts)
 	if ( $group == false )
 		return "Keine Gruppe angegeben";
 		
-	if ( $group == 'all' )
-		$tax_query = false;
-	else {
+	$return = '';	
+
+	if ( $group == 'all' ) {
+		
+		$args=array(
+			'hide_empty' => false,
+			'orderby' => 'id',
+			'order' => 'ASC',
+		);
+		$taxonomies = get_terms('cubetech_team_group', $args);
+
+		
+	} else {
+	
+		$taxonomies[] = get_term($group, 'cubetech_team_group', $args);
+		
+	}
+	
+	$tax_query = false;
+	
+	
+	foreach ( $taxonomies as $tax ) {
+		
+		$return .= '<div class="cubetech-team-container">';
+
 		$tax_query = array(
 		    array(
 		        'taxonomy' => 'cubetech_team_group',
-		        'terms' => $group,
+		        'terms' => $tax->term_id,
 		        'field' => 'id',
 		    )
 		);
-	}
-	
-	$args = array(
-		'posts_per_page'  	=> 999,
-		'numberposts'     	=> $numberposts,
-		'offset'          	=> $offset,
-		'orderby'         	=> $orderby,
-		'order'           	=> $order,
-		'post_type'       	=> 'cubetech_team',
-		'post_status'     	=> $poststatus,
-		'suppress_filters' 	=> true,
-		'tax_query'			=> $tax_query,
-	);
 		
-	$posts = get_posts($args);
-	$class = '';
-	$return = '';
-	
-	$return .= '<div class="cubetech-team-container">';
+		$return .= '<h2>' . $tax->name . '</h2>';
+		
+		$args = array(
+			'posts_per_page'  	=> 999,
+			'numberposts'     	=> $numberposts,
+			'offset'          	=> $offset,
+			'orderby'         	=> $orderby,
+			'order'           	=> $order,
+			'post_type'       	=> 'cubetech_team',
+			'post_status'     	=> $poststatus,
+			'suppress_filters' 	=> true,
+			'tax_query'			=> $tax_query,
+		);
+			
+		$posts = get_posts($args);
+		
+		$return .= cubetech_team_content($posts);
+		
+		$return .= '<div class="cubetech-team-clear"><hr /></div></div>';
+		
+	}
+		
+	return $return;
+
+}
+
+add_shortcode('cubetech-team', 'cubetech_team_shortcode');
+
+function cubetech_team_content($posts) {
+
+	$contentreturn = '';
 	
 	foreach ($posts as $post) {
 	
 		$post_meta_data = get_post_custom($post->ID);
 		$terms = wp_get_post_terms($post->ID, 'cubetech_team_group');
-		$link = '';
+		$mail = $post_meta_data['cubetech_team_mail'][0];
+		$phone = $post_meta_data['cubetech_team_phone'][0];
 		
-		if(isset($post_meta_data['cubetech_team_externallink'][0]) && $post_meta_data['cubetech_team_externallink'][0] != '')
-			$link = '<span class="cubetech-team-link"><a href="' . $post_meta_data['cubetech_team_externallink'][0] . '" target="_blank">&raquo; MEHR</a></span>';
-		elseif ( $post_meta_data['cubetech_team_links'][0] != '' && $post_meta_data['cubetech_team_links'][0] != 'nope' && $post_meta_data['cubetech_team_links'][0] > 0 )
-			$link = '<span class="cubetech-team-link"><a href="' . get_permalink( $post_meta_data['cubetech_team_links'][0] ) . '">&raquo; MEHR</a></span>';
+		$titlelink = array('', '');
 		
-		$return .= '
+		if ( get_option('cubetech_team_link_title') != false ) {
+			$titlelink = array('<a href="' . get_permalink( $post->ID ) . '">', '</a>');
+		}
+		
+		$teamtitle = '';
+		if ( get_option('cubetech_team_show_title') != false ) {
+			$teamtitle = '<h3 class="cubetech-team-title">' . $titlelink[0] . $post->post_title . $titlelink[1] . '</h3>';
+		}
+		
+		$image = '';
+		if ( get_option('cubetech_team_show_image') != false ) {
+			$image = get_the_post_thumbnail( $post->ID, 'cubetech-team-thumb', array('class' => 'cubetech-team-thumb') );
+		}
+		
+		$maillink = '';
+		if($mail != '' && get_option('cubetech_team_show_mail') != false ) {
+			$maillink = '<p><a href="mailto:' . $mail . '">' . $mail . '</a></p>';
+		}
+		
+		$phonelink = '';
+		if ( $phone != '' && get_option('cubetech_team_show_phone') != false ) {
+			$phonelink = '<p><a href="tel:' . str_replace(' ', '', $phone) . '">' . $phone . '</a></p>';
+		}
+		
+		$contentreturn .= '
 		<div class="cubetech-team">
-			<div class="cubetech-team-image">
-				' . get_the_post_thumbnail( $post->ID, 'cubetech-team-thumb', array('class' => 'cubetech-team-thumb') ) . '
-				' . $link . '
-			</div>
+			' . $teamtitle . '
+			' . $image . '
 			<div class="cubetech-team-content">
-				<h2 class="cubetech-team-title">' . $post->post_title . '</h2>
-				<h3 class="cubetech-team-subtitle">' . $post_meta_data['cubetech_team_subtitle'][0] . '</h3>
-				<div class="cubetech-team-content-container">' . $post->post_content . '</div>
+				' . $maillink . '
+				' . $phonelink . '
 			</div>
 		</div>';
 
 	}
-
-	return $return . '</div>';
-
+	
+	return $contentreturn;
+	
 }
-add_shortcode('cubetech-team', 'cubetech_team_shortcode');
 ?>

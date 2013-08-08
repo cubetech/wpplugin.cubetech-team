@@ -3,6 +3,8 @@
 	function cubetech_team_activate() {
 		update_option( 'cubetech_team_link_title', false );
 		update_option( 'cubetech_team_show_title', 'checked' );
+		update_option( 'cubetech_team_show_function', 'checked' );
+		update_option( 'cubetech_team_show_edu', 'checked' );
 		update_option( 'cubetech_team_show_image', 'checked' );
 		update_option( 'cubetech_team_show_mail', 'checked' );
 		update_option( 'cubetech_team_show_phone', 'checked' );
@@ -24,6 +26,8 @@
 	
 		delete_option( 'cubetech_team_link_title' );
 		delete_option( 'cubetech_team_show_title' );
+		delete_option( 'cubetech_team_show_function' );
+		delete_option( 'cubetech_team_show_edu' );
 		delete_option( 'cubetech_team_show_image' );
 		delete_option( 'cubetech_team_show_mail' );
 		delete_option( 'cubetech_team_show_phone' );

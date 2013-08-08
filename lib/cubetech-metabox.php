@@ -23,6 +23,12 @@ $cubetech_team_meta_fields = array(
 		'type'	=> 'text'
 	),
 	array(
+		'label'=> 'Ausbildung',
+		'desc'	=> 'Ausbildung des Mitglieds',
+		'id'	=> $prefix.'edu',
+		'type'	=> 'text'
+	),
+	array(
 		'label'=> 'Mailadresse',
 		'desc'	=> 'Mailadresse des Mitglieds',
 		'id'	=> $prefix.'mail',

@@ -1,12 +1,15 @@
 .cubetech-team-container h2 { font-size: 18px; text-transform: none; color: #555555; font-family: "AvenirNextLTW01-Regular", Arial, sans-serif; }
-.cubetech-team-container h3 { font-size: 14px; }
+.cubetech-team-container h3 { font-size: 14px; margin-bottom: 10px; }
 .cubetech-team-container { clear: both; overflow: auto; }
 .cubetech-team-container hr { border-top: 1px solid #e5e5e5; border-bottom: 1px solid #f9f9f9; margin-top: 5px; }
 .cubetech-team-container:last-child hr { display: none; }
+.cubetech-team-container img { margin-top: 10px; }
 .cubetech-team-clear { clear: both; width: 100%; box-sizing: border-box; padding-right: 12%; overflow: auto; }
 .cubetech-team { width: 50%; float: left; padding-right: 10%; box-sizing: border-box; margin-bottom: 15px; }
 
+.cubetech-team-row { display: inline-block; width: 100%; }
+
 .cubetech-team-content { margin-top: 12px; }
-.cubetech-team-content p { margin-bottom: 2px; }
-.cubetech-team-content p a,
-.cubetech-team-content p a:hover { text-transform: uppercase; font-size: 12px; color: #6c8597; }
+.cubetech-team p { margin-bottom: 2px; text-transform: uppercase; font-size: 12px; color: #555555; }
+.cubetech-team p a,
+.cubetech-team p a:hover { text-transform: uppercase; font-size: 12px; color: #6c8597; }

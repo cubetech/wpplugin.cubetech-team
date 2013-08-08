@@ -70,7 +70,7 @@ function cubetech_team_shortcode($atts)
 		if ( get_option('cubetech_team_show_hr') != false )
 			$return .= '<hr />';
 		
-		$return .= '<hr /></div></div>';
+		$return .= '</div></div>';
 		
 	}
 		
@@ -84,48 +84,64 @@ function cubetech_team_content($posts) {
 
 	$contentreturn = '';
 	
+	$i = 0;
+	
 	foreach ($posts as $post) {
 	
 		$post_meta_data = get_post_custom($post->ID);
 		$terms = wp_get_post_terms($post->ID, 'cubetech_team_group');
+		$function = $post_meta_data['cubetech_team_function'][0];
+		$edu = $post_meta_data['cubetech_team_edu'][0];
 		$mail = $post_meta_data['cubetech_team_mail'][0];
 		$phone = $post_meta_data['cubetech_team_phone'][0];
 		
 		$titlelink = array('', '');
 		
-		if ( get_option('cubetech_team_link_title') != false ) {
+		if ( get_option('cubetech_team_link_title') != false )
 			$titlelink = array('<a href="' . get_permalink( $post->ID ) . '">', '</a>');
-		}
 		
 		$teamtitle = '';
-		if ( get_option('cubetech_team_show_title') != false ) {
+		if ( get_option('cubetech_team_show_title') != false )
 			$teamtitle = '<h3 class="cubetech-team-title">' . $titlelink[0] . $post->post_title . $titlelink[1] . '</h3>';
-		}
+		
+		$functionline = '';
+
+		if ( get_option('cubetech_team_show_function') != false )
+			$functionline .= '<p class="cubetech-team-function">' . $function . '</p>';
+
+		if ( get_option('cubetech_team_show_edu') != false )
+			$functionline .= '<p class="cubetech-team-edu">' . $edu . '</p>';
+		
 		
 		$image = '';
-		if ( get_option('cubetech_team_show_image') != false ) {
+		if ( get_option('cubetech_team_show_image') != false )
 			$image = get_the_post_thumbnail( $post->ID, 'cubetech-team-thumb', array('class' => 'cubetech-team-thumb') );
-		}
 		
 		$maillink = '';
-		if($mail != '' && get_option('cubetech_team_show_mail') != false ) {
+		if($mail != '' && get_option('cubetech_team_show_mail') != false )
 			$maillink = '<p><a href="mailto:' . $mail . '">' . $mail . '</a></p>';
-		}
 		
 		$phonelink = '';
-		if ( $phone != '' && get_option('cubetech_team_show_phone') != false ) {
+		if ( $phone != '' && get_option('cubetech_team_show_phone') != false )
 			$phonelink = '<p><a href="tel:' . str_replace(' ', '', $phone) . '">' . $phone . '</a></p>';
-		}
 		
+		if ( $i == 0 )
+			$contentreturn .= '<div class="cubetech-team-row">';
+		elseif ( $i % 2 == 0 && $i < (count($posts)-1) )
+			$contentreturn .= '</div><div class="cubetech-team-row">';
+
 		$contentreturn .= '
 		<div class="cubetech-team">
 			' . $teamtitle . '
 			' . $image . '
 			<div class="cubetech-team-content">
+				' . $functionline . '
 				' . $maillink . '
 				' . $phonelink . '
 			</div>
 		</div>';
+		
+		$i++;
 
 	}
 	

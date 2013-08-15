@@ -114,8 +114,39 @@ function cubetech_team_content($posts) {
 		
 		
 		$image = '';
-		if ( get_option('cubetech_team_show_image') != false )
-			$image = get_the_post_thumbnail( $post->ID, 'cubetech-team-thumb', array('class' => 'cubetech-team-thumb') );
+		if ( get_option('cubetech_team_show_image') != false ) {
+			$image .= '<div class="cubetech-team-thumb-container">';
+			$image .= get_the_post_thumbnail( $post->ID, 'cubetech-team-thumb', array('class' => 'cubetech-team-thumb cubetech-team-thumb-' . $post->ID ) );
+			
+			$args = array(
+			    'post_type' => 'attachment',
+			    'numberposts' => null,
+			    'post_status' => null,
+			    'post_parent' => $post->ID,
+			    'exclude' => get_post_thumbnail_id($post->ID),
+			);
+			$attachments = get_posts($args);
+				
+			if ( count($attachments) > 0 ) {
+				foreach($attachments as $a) {
+					$attachments = (Array)$a;
+					break;
+				}
+				$image .= wp_get_attachment_image($attachments['ID'], 'cubetech-team-thumb', false, array('class' => 'cubetech-team-thumb-hover') );
+				$contentreturn .= '
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$(".cubetech-team-thumb-' . $post->ID . '").hover(function() {
+							$(this).stop().animate({"opacity": "0"}, "slow");
+								}, function() {
+							$(this).stop().animate({"opacity": "1"}, "slow");
+						});
+					});
+				</script>
+				';
+			}
+			$image .= '</div>';
+		}
 		
 		$maillink = '';
 		if($mail != '' && get_option('cubetech_team_show_mail') != false )

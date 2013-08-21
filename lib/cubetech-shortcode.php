@@ -160,8 +160,6 @@ function cubetech_team_content($posts) {
 			$contentreturn .= '<div class="cubetech-team-row">';
 		elseif ( $i % 2 == 0 && $i < (count($posts)-1) )
 			$contentreturn .= '</div><div class="cubetech-team-row">';
-		elseif ( $i == (count($posts)-1) )
-			$contentreturn .= '</div>';
 
 		$contentreturn .= '
 		<div class="cubetech-team">
@@ -174,6 +172,9 @@ function cubetech_team_content($posts) {
 			</div>
 		</div>';
 		
+		if ( $i == (count($posts)-1) )
+			$contentreturn .= '</div>';
+
 		$i++;
 
 	}

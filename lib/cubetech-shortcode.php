@@ -133,7 +133,7 @@ function cubetech_team_content($posts) {
 					break;
 				}
 				$image .= wp_get_attachment_image($attachments['ID'], 'cubetech-team-thumb', false, array('class' => 'cubetech-team-thumb-hover') );
-				$contentreturn .= '
+				$image  .= '
 				<script type="text/javascript">
 					$(document).ready(function(){
 						$(".cubetech-team-thumb-' . $post->ID . '").hover(function() {
@@ -160,6 +160,8 @@ function cubetech_team_content($posts) {
 			$contentreturn .= '<div class="cubetech-team-row">';
 		elseif ( $i % 2 == 0 && $i < (count($posts)-1) )
 			$contentreturn .= '</div><div class="cubetech-team-row">';
+		elseif ( $i == (count($posts)-1) )
+			$contentreturn .= '</div>';
 
 		$contentreturn .= '
 		<div class="cubetech-team">

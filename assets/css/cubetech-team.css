@@ -6,8 +6,8 @@
 .cubetech-team-container .cubetech-team-thumb-container { margin-top: 10px; position: relative; overflow: auto;  }
 .cubetech-team-thumb-container .cubetech-team-thumb-hover { position: absolute; top: 0; left: 0; }
 .cubetech-team-thumb-container .cubetech-team-thumb { z-index: 10; position: relative; }
-.cubetech-team-clear { clear: both; width: 100%; box-sizing: border-box; padding-right: 12%; overflow: auto; }
-.cubetech-team { width: 50%; float: left; padding-right: 10%; box-sizing: border-box; margin-bottom: 15px; }
+.cubetech-team-clear { clear: both; width: 100%; -moz-box-sizing: border-box; box-sizing: border-box; padding-right: 12%; overflow: auto; }
+.cubetech-team { width: 50%; float: left; padding-right: 10%; -moz-box-sizing: border-box; box-sizing: border-box; margin-bottom: 15px; }
 
 .cubetech-team-row { display: inline-block; width: 100%; }
 

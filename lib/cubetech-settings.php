@@ -61,6 +61,16 @@ function cubetech_team_settings_page() {
         <td><input type="checkbox" name="cubetech_team_show_hr" value="checked" <?php echo get_option('cubetech_team_show_hr'); ?> /></td>
         </tr>
          
+        <tr valign="top">
+        <th scope="row">Layout</th>
+        <td>
+        	<select name="cubetech_team_layout">
+        		<option value="2col">Standard: zweispaltig</option>
+        		<option value="3coljquery">dreispaltig mit jQuery</option>
+        	</select>
+        </td>
+        </tr>
+         
     </table>
     
     <?php submit_button(); ?>

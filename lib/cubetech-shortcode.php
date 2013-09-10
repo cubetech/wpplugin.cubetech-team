@@ -133,17 +133,6 @@ function cubetech_team_content($posts) {
 					break;
 				}
 				$image .= wp_get_attachment_image($attachments['ID'], 'cubetech-team-thumb', false, array('class' => 'cubetech-team-thumb-hover') );
-				$image  .= '
-				<script type="text/javascript">
-					$(document).ready(function(){
-						$(".cubetech-team-thumb-' . $post->ID . '").hover(function() {
-							$(this).stop().animate({"opacity": "0"}, "slow");
-								}, function() {
-							$(this).stop().animate({"opacity": "1"}, "slow");
-						});
-					});
-				</script>
-				';
 			}
 			$image .= '</div>';
 		}

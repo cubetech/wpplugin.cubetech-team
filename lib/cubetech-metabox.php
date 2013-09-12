@@ -15,44 +15,62 @@ add_action('add_meta_boxes', 'add_cubetech_team_meta_box');
 // Field Array
 $prefix = 'cubetech_team_';
 
-$cubetech_team_meta_fields = array(
-	array(
+$cubetech_team_meta_fields = array();
+
+if(get_option('cubetech_team_show_function') == 'checked') {
+	array_push($cubetech_team_meta_fields, array(
 		'label'=> 'Funktion',
 		'desc'	=> 'Funktion des Mitglieds',
 		'id'	=> $prefix.'function',
 		'type'	=> 'text'
-	),
-	array(
-		'label'=> 'Ausbildung',
-		'desc'	=> 'Ausbildung des Mitglieds',
+	));
+}
+if(get_option('cubetech_team_show_edu') == 'checked') {
+	array_push($cubetech_team_meta_fields, array(
+		'label'=> 'Ausbildung / Zusatzinfos',
+		'desc'	=> 'Ausbildung oder Zusatzinfos des Mitglieds',
 		'id'	=> $prefix.'edu',
 		'type'	=> 'text'
-	),
-	array(
+	));
+}
+if(get_option('cubetech_team_show_mail') == 'checked') {
+	array_push($cubetech_team_meta_fields, array(
 		'label'=> 'Mailadresse',
 		'desc'	=> 'Mailadresse des Mitglieds',
 		'id'	=> $prefix.'mail',
 		'type'	=> 'text'
-	),
-	array(
+	));
+}
+if(get_option('cubetech_team_show_phone') == 'checked') {
+	array_push($cubetech_team_meta_fields, array(
 		'label'=> 'Telefonnummer',
 		'desc'	=> 'Telefonnummer des Mitglieds (Format: +xx xx xxx xx xx)',
 		'id'	=> $prefix.'phone',
 		'type'	=> 'text'
-	),
-	array(
+	));
+}
+if(get_option('cubetech_team_show_social') == 'checked') {
+	array_push($cubetech_team_meta_fields, array(
 		'label'=> 'Facebook Profil',
 		'desc'	=> 'Facebook Benutzer-ID des Mitglieds',
 		'id'	=> $prefix.'facebook',
 		'type'	=> 'text'
-	),
-	array(
+	));
+	array_push($cubetech_team_meta_fields, array(
 		'label'=> 'Xing Profil',
 		'desc'	=> 'Xing Benutzer-ID des Mitglieds',
 		'id'	=> $prefix.'xing',
 		'type'	=> 'text'
-	),
-);
+	));
+}
+if(get_option('cubetech_team_use_editor') != 'checked') {
+	array_push($cubetech_team_meta_fields, array(
+		'label'=> 'Beschreibung',
+		'desc'	=> 'Beschreibung des Mitglieds',
+		'id'	=> $prefix.'description',
+		'type'	=> 'textarea'
+	));
+}
 
 // The Callback
 function show_cubetech_team_meta_box() {

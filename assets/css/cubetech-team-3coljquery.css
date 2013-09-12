@@ -1,0 +1,9 @@
+.cubetech-team { width: 33%; padding: 0 2%; }
+
+.cubetech-team-3coljquery { display: none; }
+
+.cubetech-team-more-button { position: relative; display: inline-block; width: 100px; height: 30px; text-align: center; }
+.cubetech-team-more-button > span { display: inline-block; position: absolute; left: 0; right: 0; width: 100px; text-align: center; }
+.cubetech-team-more-button .less { display: none; }
+
+.cubetech-team-description { margin-top: 10px; }

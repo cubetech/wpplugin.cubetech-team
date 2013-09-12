@@ -8,8 +8,11 @@
 		update_option( 'cubetech_team_show_image', 'checked' );
 		update_option( 'cubetech_team_show_mail', 'checked' );
 		update_option( 'cubetech_team_show_phone', 'checked' );
+		update_option( 'cubetech_team_show_social', 'checked' );
 		update_option( 'cubetech_team_show_hr', 'checked' );
 		update_option( 'cubetech_team_show_groups', 'checked' );
+		update_option( 'cubetech_team_layout', '2col' );
+		update_option( 'cubetech_team_use_editor', '' );
 	}
 	register_activation_hook( __FILE__, 'cubetech_team_activate' );
 	
@@ -31,8 +34,11 @@
 		delete_option( 'cubetech_team_show_image' );
 		delete_option( 'cubetech_team_show_mail' );
 		delete_option( 'cubetech_team_show_phone' );
+		delete_option( 'cubetech_team_show_social' );
 		delete_option( 'cubetech_team_show_hr' );
 		delete_option( 'cubetech_team_show_groups' );
+		delete_option( 'cubetech_team_layout' );
+		delete_option( 'cubetech_team_use_editor' );
 	
 	}
 	register_uninstall_hook( __FILE__, 'cubetech_team_uninstall' );

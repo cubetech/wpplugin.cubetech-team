@@ -94,6 +94,7 @@ function cubetech_team_content($posts) {
 		$edu = $post_meta_data['cubetech_team_edu'][0];
 		$mail = $post_meta_data['cubetech_team_mail'][0];
 		$phone = $post_meta_data['cubetech_team_phone'][0];
+		$desc = $post_meta_data['cubetech_team_description'][0];
 		
 		$titlelink = array('', '');
 		
@@ -105,12 +106,13 @@ function cubetech_team_content($posts) {
 			$teamtitle = '<h3 class="cubetech-team-title">' . $titlelink[0] . $post->post_title . $titlelink[1] . '</h3>';
 		
 		$functionline = '';
+		$eduline = '';
 
 		if ( get_option('cubetech_team_show_function') != false )
 			$functionline .= '<p class="cubetech-team-function">' . $function . '</p>';
 
 		if ( get_option('cubetech_team_show_edu') != false )
-			$functionline .= '<p class="cubetech-team-edu">' . $edu . '</p>';
+			$eduline .= '<p class="cubetech-team-edu">' . $edu . '</p>';
 		
 		
 		$image = '';
@@ -144,10 +146,27 @@ function cubetech_team_content($posts) {
 		$phonelink = '';
 		if ( $phone != '' && get_option('cubetech_team_show_phone') != false )
 			$phonelink = '<p><a href="tel:' . str_replace(' ', '', $phone) . '">' . $phone . '</a></p>';
+			
+		$morelink = '';
+		if(get_option('cubetech_team_layout') == '3coljquery') {
+			$morelink = '<a class="cubetech-team-more-button" href="#"><span class="more">' . __('Mehr') . '</span><span class="less">' . __('Weniger') . '</span></a>';
+		}
+		
+		$description = '';
+		if(get_option('cubetech_team_layout') == '3coljquery' && get_option('cubetech_team_use_editor') != 'checked') {
+			$description = '<div class="cubetech-team-description">' . $desc . '</div>';
+		}
+		
+		$divider = 2;
+		
+		if(get_option('cubetech_team_layout') == '2col')
+			$divider = 2;
+		elseif(get_option('cubetech_team_layout') == '3coljquery')
+			$divider = 3;
 		
 		if ( $i == 0 )
 			$contentreturn .= '<div class="cubetech-team-row">';
-		elseif ( $i % 2 == 0 && $i < (count($posts)-1) )
+		elseif ( $i % $divider == 0 && $i < (count($posts)-1) )
 			$contentreturn .= '</div><div class="cubetech-team-row">';
 
 		$contentreturn .= '
@@ -156,8 +175,13 @@ function cubetech_team_content($posts) {
 			' . $image . '
 			<div class="cubetech-team-content">
 				' . $functionline . '
-				' . $maillink . '
-				' . $phonelink . '
+				<div class="cubetech-team-3coljquery">
+					' . $eduline . '
+					' . $maillink . '
+					' . $phonelink . '
+					' . $description . '
+				</div>
+				' . $morelink . '
 			</div>
 		</div>';
 		

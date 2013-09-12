@@ -1,5 +1,11 @@
 <?php
 function cubetech_team_create_post_type() {
+
+	$supports = array('title', 'thumbnail');
+	if(get_option('cubetech_team_use_editor') == 'checked') {
+		$supports = array('title', 'editor', 'thumbnail');
+	}
+
 	register_post_type('cubetech_team',
 		array(
 			'labels' => array(
@@ -23,7 +29,7 @@ function cubetech_team_create_post_type() {
 			'menu_position' => '20',
 			'menu_icon' => null,
 			'hierarchical' => true,
-			'supports' => array('title', 'editor', 'thumbnail')
+			'supports' => $supports,
 		)
 	);
 	flush_rewrite_rules();

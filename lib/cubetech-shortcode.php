@@ -149,7 +149,7 @@ function cubetech_team_content($posts) {
 			
 		$morelink = '';
 		if(get_option('cubetech_team_layout') == '3coljquery') {
-			$morelink = '<a class="cubetech-team-more-button" href="#"><span class="more">' . __('Mehr') . '</span><span class="less">' . __('Weniger') . '</span></a>';
+			$morelink = '<a class="cubetech-team-more-button" href="#"><span class="more">' . __('Mehr', 'cubetech-icon-facts') . '</span><span class="less">' . __('Weniger', 'cubetech-icon-facts') . '</span></a>';
 		}
 		
 		$description = '';

@@ -4,7 +4,7 @@ Donate link: http://www.cubetech.ch
 Tags: blocks, block, jquery, cubetech, group, custom, post, type, custom, customizable, tinymce, category, filter, jquery
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,10 @@ If you have an idea or a pull request, contribute here:
 https://github.com/cubetech/wordpress.cubetech-team
                                                                                                                                                                   
 == Changelog ==                                                                                                                                                   
+
+= 1.2.1 =
+
+* Fixed translation
 
 = 1.2 =
 * Extended with templates and new options

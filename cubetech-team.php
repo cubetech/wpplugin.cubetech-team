@@ -18,7 +18,8 @@ include_once('lib/cubetech-settings.php');
 add_image_size( 'cubetech-team-thumb', 231, 124, true );
 
 wp_enqueue_script('jquery');
-wp_register_script('cubetech_team_js', plugins_url('assets/js/cubetech-team.js', __FILE__), 'jquery');
+
+wp_register_script('cubetech_team_js', plugins_url('assets/js/cubetech-team.js', __FILE__), array('jquery','wpdialogs'));
 wp_enqueue_script('cubetech_team_js');
 
 if(get_option('cubetech_team_layout') == '3coljquery') {
@@ -28,9 +29,25 @@ if(get_option('cubetech_team_layout') == '3coljquery') {
 
 add_action('wp_enqueue_scripts', 'cubetech_team_add_styles');
 
+add_action( 'admin_enqueue_scripts', 'enqueue_css' );
+
+
+if(!function_exists('enqueue_css'))
+{
+	function enqueue_css()
+	{
+		wp_register_style('custom_jquery-ui-dialog', plugins_url('assets/css/jquery-ui-dialog.min.css', __FILE__) );
+		wp_enqueue_style('custom_jquery-ui-dialog');
+	}
+} 
+
+
 function cubetech_team_add_styles() {
 	wp_register_style('cubetech-team-css', plugins_url('assets/css/cubetech-team.css', __FILE__) );
 	wp_enqueue_style('cubetech-team-css');
+	
+
+	
 	if(get_option('cubetech_team_layout') == '3coljquery') {
 		wp_register_style('cubetech-team-css-3coljquery', plugins_url('assets/css/cubetech-team-3coljquery.css', __FILE__) );
 		wp_enqueue_style('cubetech-team-css-3coljquery');

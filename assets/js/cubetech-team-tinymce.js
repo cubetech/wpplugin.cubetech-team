@@ -14,12 +14,16 @@ tinymce.create(
 				{
 					cmd   : 'cubetech_team_button_cmd',
 					title : editor.getLang( 'cubetech_team.buttonTitle', 'cubetech Team' ),
-					image : url + '/../img/toolbar-icon.png'
+					image : url + '/../img/toolbar-icon.png',
+					/*onclick: function(){
+						editor.insertContent("test");
+					}*/
 				}
 			);
 			/**
 			* and a new command
 			*/
+			
 			editor.addCommand(
 				'cubetech_team_button_cmd',
 				function() {

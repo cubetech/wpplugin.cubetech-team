@@ -2,9 +2,9 @@
 Contributors: cubetech, chrigu99
 Donate link: http://www.cubetech.ch
 Tags: blocks, block, jquery, cubetech, group, custom, post, type, custom, customizable, tinymce, category, filter, jquery
-Requires at least: 3.4
-Tested up to: 3.6
-Stable tag: 1.2.1
+Requires at least: 3.6
+Tested up to: 4.2
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,26 +26,34 @@ Plugin features:
 * Template setting
 * Facebook and Xing integration (coming soon)
 
-== Installation ==                                                                                                                                                
-                                                                                                                                                                  
-This section describes how to install the plugin and get it working.                                                                                              
-                                                                                                                                                                  
+== Installation ==
+
+This section describes how to install the plugin and get it working.    
+
 1. Upload plugin folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress                                                                                                    
+1. Activate the plugin through the 'Plugins' menu in WordPress    
 1. Place the shortcode in your content
-                                                                                                                                                                  
-== Frequently Asked Questions ==                                                                                                                                  
-                                                                                                                                                                  
+
+== Frequently Asked Questions ==    
+
 = How to contribute? =
-                                                                                                                                                                  
+
 If you have an idea or a pull request, contribute here:
 
 https://github.com/cubetech/wordpress.cubetech-team
-                                                                                                                                                                  
-== Changelog ==                                                                                                                                                   
+
+== Changelog ==
+
+= 1.4.0 =
+* Fixed dialog closing
+* Fixed enqueues
+* Removed unneeded files
+* Created init file
+
+= 1.3.0 =
+* Fixed TinyMCE Bug
 
 = 1.2.1 =
-
 * Fixed translation
 
 = 1.2 =

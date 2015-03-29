@@ -27,7 +27,7 @@ function cubetech_team_shortcode($atts)
 		
 	} else {
 	
-		$taxonomies[] = get_term($group, 'cubetech_team_group', $args);
+		$taxonomies[] = get_term($group, 'cubetech_team_group');
 		
 	}
 	
@@ -90,11 +90,11 @@ function cubetech_team_content($posts) {
 	
 		$post_meta_data = get_post_custom($post->ID);
 		$terms = wp_get_post_terms($post->ID, 'cubetech_team_group');
-		$function = $post_meta_data['cubetech_team_function'][0];
-		$edu = $post_meta_data['cubetech_team_edu'][0];
-		$mail = $post_meta_data['cubetech_team_mail'][0];
-		$phone = $post_meta_data['cubetech_team_phone'][0];
-		$desc = $post_meta_data['cubetech_team_description'][0];
+		$function = @$post_meta_data['cubetech_team_function'][0];
+		$edu = @$post_meta_data['cubetech_team_edu'][0];
+		$mail = @$post_meta_data['cubetech_team_mail'][0];
+		$phone = @$post_meta_data['cubetech_team_phone'][0];
+		$desc = @$post_meta_data['cubetech_team_description'][0];
 		
 		$titlelink = array('', '');
 		

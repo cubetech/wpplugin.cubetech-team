@@ -23,7 +23,7 @@ function cubetech_team_shortcode($atts)
 			'order' => 'ASC',
 		);
 		$taxonomies = get_terms('cubetech_team_group', $args);
-
+		
 		
 	} else {
 	
@@ -48,18 +48,33 @@ function cubetech_team_shortcode($atts)
 		
 		if ( get_option('cubetech_team_show_groups') != false )
 			$return .= '<h2>' . $tax->name . '</h2>';
-		
-		$args = array(
-			'posts_per_page'  	=> 999,
-			'numberposts'     	=> $numberposts,
-			'offset'          	=> $offset,
-			'orderby'         	=> $orderby,
-			'order'           	=> $order,
-			'post_type'       	=> 'cubetech_team',
-			'post_status'     	=> $poststatus,
-			'suppress_filters' 	=> true,
-			'tax_query'			=> $tax_query,
-		);
+	
+		if( $tax->slug == 'geschaeftsleitung' ) {
+			$args = array(
+				'posts_per_page'  	=> -1,
+				'numberposts'     	=> $numberposts,
+				'offset'          	=> $offset,
+				'orderby'         	=> 'menu_order',
+				'order'           	=> 'ASC',
+				'post_type'       	=> 'cubetech_team',
+				'post_status'     	=> $poststatus,
+				'suppress_filters' 	=> true,
+				'tax_query'			=> $tax_query,
+			);
+		} else {
+			$args = array(
+				'posts_per_page'  	=> -1,
+				'numberposts'     	=> $numberposts,
+				'offset'          	=> $offset,
+				'orderby'         	=> 'title',
+				'order'           	=> 'ASC',
+				'post_type'       	=> 'cubetech_team',
+				'post_status'     	=> $poststatus,
+				'suppress_filters' 	=> true,
+				'tax_query'			=> $tax_query,
+			);
+		}
+			
 			
 		$posts = get_posts($args);
 		
@@ -94,7 +109,8 @@ function cubetech_team_content($posts) {
 		$edu = $post_meta_data['cubetech_team_edu'][0];
 		$mail = $post_meta_data['cubetech_team_mail'][0];
 		$phone = $post_meta_data['cubetech_team_phone'][0];
-		$desc = $post_meta_data['cubetech_team_description'][0];
+		if($post_meta_data['cubetech_team_description'][0])
+			$desc = $post_meta_data['cubetech_team_description'][0];
 		
 		$titlelink = array('', '');
 		
@@ -114,28 +130,13 @@ function cubetech_team_content($posts) {
 		if ( get_option('cubetech_team_show_edu') != false )
 			$eduline .= '<p class="cubetech-team-edu">' . $edu . '</p>';
 		
-		
 		$image = '';
 		if ( get_option('cubetech_team_show_image') != false ) {
 			$image .= '<div class="cubetech-team-thumb-container">';
-			$image .= get_the_post_thumbnail( $post->ID, 'cubetech-team-thumb', array('class' => 'cubetech-team-thumb cubetech-team-thumb-' . $post->ID ) );
-			
-			$args = array(
-			    'post_type' => 'attachment',
-			    'numberposts' => null,
-			    'post_status' => null,
-			    'post_parent' => $post->ID,
-			    'exclude' => get_post_thumbnail_id($post->ID),
-			);
-			$attachments = get_posts($args);
-				
-			if ( count($attachments) > 0 ) {
-				foreach($attachments as $a) {
-					$attachments = (Array)$a;
-					break;
-				}
-				$image .= wp_get_attachment_image($attachments['ID'], 'cubetech-team-thumb', false, array('class' => 'cubetech-team-thumb-hover') );
-			}
+			if(get_field('main_teamimage', $post->ID) > 0)
+				$image .= wp_get_attachment_image( get_field('main_teamimage', $post->ID), 'cubetech-team-thumb', false, array('class' => 'cubetech-team-thumb cubetech-team-thumb-' . $post->ID ) );
+			if(get_field('second_teamimage', $post->ID) > 0)
+				$image .= wp_get_attachment_image( get_field('second_teamimage', $post->ID), 'cubetech-team-thumb', false, array('class' => 'cubetech-team-thumb-hover') );
 			$image .= '</div>';
 		}
 		
@@ -166,7 +167,7 @@ function cubetech_team_content($posts) {
 		
 		if ( $i == 0 )
 			$contentreturn .= '<div class="cubetech-team-row">';
-		elseif ( $i % $divider == 0 && $i < (count($posts)-1) )
+		elseif ( $i % $divider == 0 )
 			$contentreturn .= '</div><div class="cubetech-team-row">';
 
 		$contentreturn .= '

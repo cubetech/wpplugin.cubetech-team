@@ -32,7 +32,6 @@ function cubetech_team_create_post_type() {
 			'supports' => $supports,
 		)
 	);
-	flush_rewrite_rules();
 }
 add_action('init', 'cubetech_team_create_post_type');
 ?>

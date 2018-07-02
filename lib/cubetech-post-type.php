@@ -22,7 +22,7 @@ function cubetech_team_create_post_type() {
 			),
 			'capability_type' => 'post',
 			'taxonomies' => array('cubetech_team_group'),
-			'public' => true,
+			'public' => false,
 			'has_archive' => false,
 			'rewrite' => array('slug' => 'team', 'with_front' => false),
 			'show_ui' => true,
